@@ -1,19 +1,19 @@
-#include <Wire.h>
+#include <Wire.h> // necessary, or the application won't build properly
 #include <stdio.h>
 #include <PCF8583.h>
 /*****************************************************************************
  *  read/write serial interface to PCF8583 RTC via I2C interface
  *
- *  Arduino analog input 5 - I2C SCL
- *  Arduino analog input 4 - I2C SDA
+ *  Arduino analog input 5 - I2C SCL (PCF8583 pin 6)
+ *  Arduino analog input 4 - I2C SDA (PCF8583 pin 5)
+ *
+ *  You can set the type by sending it YYMMddhhmmss;
+ *  the semicolon on the end tells it you're done...
  *
  ******************************************************************************/
-//  I2C device address is 0 1 0 0   A2 A1 A0
-#define PCF8583_ADDRESS  ( 0xA0 >> 1)
-
 
 int correct_address = 0;
-PCF8583 p (PCF8583_ADDRESS);	
+PCF8583 p (0xA0);	
 void setup(void){
   Serial.begin(9600);
   Serial.print("booting...");
