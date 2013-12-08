@@ -50,11 +50,12 @@
 #ifndef PCF8583_H
 #define PCF8583_H
 
-#include <WProgram.h>
+#include <Arduino.h>
 #include <../Wire/Wire.h>
 
 class PCF8583 {
     int address;
+    int dow;
   public:
     int second;
     int minute;
@@ -64,9 +65,23 @@ class PCF8583 {
     int year;
     int year_base;
 
+    int alarm_milisec;
+    int alarm_second;
+    int alarm_minute;
+    int alarm_hour;
+    int alarm_day;
+
     PCF8583(int device_address);
+    void init ();
+    
     void get_time();
     void set_time();
+    void get_alarm();
+    int  get_day_of_week() const {
+      return dow;
+    }    
+
+    void set_daily_alarm();
     int bcd_to_byte(byte bcd);
     byte int_to_bcd(int in);
 };
